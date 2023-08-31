@@ -20,7 +20,7 @@ class Cargador_Dao:
         return  True    
     
     def devolver(self):
-        return self.Cargador[0]
+        return self.Cargador
     
 
 
