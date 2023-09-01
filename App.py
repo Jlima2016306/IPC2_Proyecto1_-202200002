@@ -10,7 +10,8 @@ from clases.Senal import Senal
 from Listas.Lista_Cargador import Cargador_Dao
 from Listas.cargadorPide import select_file
 
-
+from Listas.lista_patrones import lista_patrones
+from Listas.lista_grupos import lista_grupos
 
 #Lectura del xml
 
@@ -63,24 +64,28 @@ def imprimir_Lista():
                 Lista_dato_temporal= Lista_dato()
                 Lista_dato_patrones_temporal= Lista_dato()
 
+                lista_patrones_temporal=lista_patrones()
+
+                lista_grupos_temporal=lista_grupos()
                 for dato_senal in senales_temporal.findall("dato"):
                     t_dato = dato_senal.get("t")
                     A_dato = dato_senal.get("A")
                     num_dato = dato_senal.text
 
                     nuevo = Dato(int(t_dato), int(A_dato),int(num_dato))
-                    Lista_dato_temporal.insert_dato(nuevo)
+                    Lista_dato_temporal.insertar_dato(nuevo)
                     if num_dato != "NULL" and int(num_dato) >0:
                         nuevo = Dato(int(t_dato), int(A_dato),1)
-                        Lista_dato_patrones_temporal.insert_dato(nuevo)
+                        Lista_dato_patrones_temporal.insertar_dato(nuevo)
                     else:
                         nuevo = Dato(int(t_dato), int(A_dato),0)
-                        Lista_dato_patrones_temporal.insert_dato(nuevo)                
-                Lista_senales_temporal.Incertar_dato(Senal(nombre_Senal,t_Senal,A_Senal,Lista_dato_temporal,Lista_dato_patrones_temporal))
+                        Lista_dato_patrones_temporal.insertar_dato(nuevo)                
+                Lista_senales_temporal.Incertar_dato(Senal(nombre_Senal,t_Senal,A_Senal,Lista_dato_temporal,Lista_dato_patrones_temporal,lista_patrones_temporal,lista_grupos_temporal))
             
             print("Procesando archivos...")
             print("Calculando la matriz...")
             print("Realizando suma de tuplas...")
+            Lista_senales_temporal.calcular_los_patrones("Señal Facilita")
         
         else:
             print("Sin archivos")
@@ -95,9 +100,11 @@ def graficar():
     opcion=input("Ingrese una opción del menú: ")
     while True:
         if opcion=="1":
-            Lista_senales_temporal.grafica_mi_lista_original()            
+            opcion2=input("Escriba el nombre de la señal: ")
+            Lista_senales_temporal.grafica_mi_lista_original(opcion2)            
         elif opcion=="2":
-            Lista_senales_temporal.grafica_mi_lista_de_patrones() 
+            opcion2=input("Escriba el nombre de la señal: ")
+            Lista_senales_temporal.grafica_mi_lista_de_patrones(opcion2) 
         elif opcion=="3":
              mostrar_Documentarion()
         elif opcion=="4":
