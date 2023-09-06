@@ -150,7 +150,7 @@ def mostrar_menu():
     print("3. Escribir archivo salida")
     print("4. Mostrar Datos del estudiante")
     print("5. Generar Gráfica")
-    print("6. Inicialializar")
+    print("6. Inicializar")
     print("7. salir")
     opcion=input("Ingrese una opción del menú: ")
     while True:
