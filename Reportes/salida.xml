@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<listaSenales>
+  <senal nombre='pop' A='3'>
+    <nombre>pop</nombre>
+    <grupo g='1'>
+      <tiempo>4</tiempo>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+  </grupo g='1'>
+  </senal nombre='pop' A='3'>
+  <senal nombre='Señal Facilita' A='3'>
+    <nombre>Señal Facilita</nombre>
+    <grupo g='2'>
+      <tiempo>4</tiempo>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>1</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+      <dato>0</dato>
+    </grupo g='2'>
+  </senal nombre='Señal Facilita' A='3'>
+</listaSenales>

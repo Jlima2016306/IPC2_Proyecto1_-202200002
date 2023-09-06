@@ -23,17 +23,14 @@ class Lista_dato:
   def insertar_dato_ordenado(self, dato):
         nueva_celda = Nodo_dato(dato=dato)
         self.contador_celdas += 1
-        # Si la lista está vacía solo añade el nuevo nodo
         if self.primero is None:
             self.primero = nueva_celda
             return
-        # Caso especial: la nueva celda debe ser el nuevo primer nodo, debe reemplazar al primero
         if dato.t < self.primero.dato.t or (
                 dato.t == self.primero.dato.t and dato.A <= self.primero.dato.A):
             nueva_celda.siguiente = self.primero
             self.primero = nueva_celda
             return
-        # Si no cumple con ninguno de los casos, recorrer hasta encontrar su posición
         actual = self.primero
         while actual.siguiente is not None and (
                 dato.t> actual.siguiente.dato.t or (
@@ -50,35 +47,26 @@ class Lista_dato:
       actual = actual.siguiente
     print("===========================================================================================")
 
-  # método para devolver los patrones por nivel
+
   def devolver_patrones_por_nivel(self,lista_patrones_nivel):
     actual = self.primero
-    sentinela_de_filas=actual.dato.t #iniciaria en 1
+    sentinela_de_filas=actual.dato.t 
     fila_iniciada=False
     recolector_patron=""
     while actual != None:
-      # si hay cambio de fila entramos al if
       if  sentinela_de_filas!=actual.dato.t:
-        # fila iniciada se vuelve false, por que se acaba la fila
         fila_iniciada=False
-        # ya que terminamos la fila, podemos guardar los patrones
         lista_patrones_nivel.insertar_dato(Patron(sentinela_de_filas,recolector_patron))
         recolector_patron=""
-        # actualizamos el valor de la fila (nivel)
         sentinela_de_filas=actual.dato.t
-      # si fila iniciada es false, quiere decir que acaba de terminar fila y debemos empezar una nueva
       if fila_iniciada==False:
         fila_iniciada=True
-        #Recolectamos el valor, ya que estamos en la fila
         recolector_patron+=str(actual.dato.num)+"-"
       else:
-        #Recolectamos el valor, ya que estamos en la fila
         recolector_patron+=str(actual.dato.num)+"-"
       actual = actual.siguiente
-    # Agregamos un nuevo patrón, sería el de toda la fila, ej: 0-1-1-1
     lista_patrones_nivel.insertar_dato(Patron(sentinela_de_filas,recolector_patron))
     print(lista_patrones_nivel)
-    # devolvermos la lista llena con los patrones
     return lista_patrones_nivel
 
   def generar_grafica(self,nombre_carcel,niveles,celdas_por_nivel):
@@ -90,17 +78,15 @@ class Lista_dato:
         a0 [ label=<
         <TABLE border="10" cellspacing="10" cellpadding="10" style="rounded" bgcolor="blue:red" gradientangle="315">\n"""
     actual = self.primero
-    sentinela_de_filas=actual.dato.t #iniciaria en 1
+    sentinela_de_filas=actual.dato.t 
     fila_iniciada=False
     while actual != None:
       if  sentinela_de_filas!=actual.dato.t:
         sentinela_de_filas=actual.dato.t
         fila_iniciada=False
-        # Cerramos la fila
         text+="""</TR>\n"""  
       if fila_iniciada==False:
         fila_iniciada=True
-        #Abrimos la fila
         text+="""<TR>"""  
         text+="""<TD border="3"  bgcolor="yellow" gradientangle="315">"""+str(actual.dato.num) +"""</TD>\n"""
       else:
@@ -109,10 +95,12 @@ class Lista_dato:
     text+=""" </TR></TABLE>>];
             }
             }\n"""
+    
+
     f.write(text)
     f.close()
     os.environ["PATH"] += os.pathsep + 'C:/Program Files/Graphviz/bin'
-    os.system('dot -Tpng Lectura_xml/bb.dot -o Lectura_xml/grafo2.png')
+    os.system('dot -Tpng Lectura_xml/bb.dot -o Lectura_xml/grafo.png')
     print("terminado")
 
 
@@ -121,25 +109,24 @@ class Lista_dato:
     string_resultado=""
     string_temporal=""
     buffer=""
-    # viene un parametro llamado grupo, es un string con este formato "1,2"
-    # recorremos caracter por caracter
+
     for digito in grupo:
-      #si es digito
       if digito.isdigit():
-        #añadimos al buffer
         buffer+=digito
       else:
-        # si no es buffer, lo vaciamos
         string_temporal=""
-        #recorremos la lista y recuperamos los valores para este grupo
         actual = self.primero
         while actual != None:
-          # si encontramos coincidencia del digito y el nivel , obtenemos su valor
           if actual.dato.t==int(buffer):
             string_temporal+=str(actual.dato.num) +","
           actual = actual.siguiente
         string_resultado+=string_temporal+"\n"
         buffer=""
-    #devolvemos el string resultado
     return string_resultado
+  
+  def eliminar(self):
+        while self.primero:
+            temp = self.primero
+            self.primero = self.primero.siguiente
+            temp.siguiente = None 
     

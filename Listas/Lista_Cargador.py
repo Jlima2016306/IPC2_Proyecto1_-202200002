@@ -1,26 +1,39 @@
 from clases.Cargador import Cargador
 from tkinter.filedialog import askopenfilename
+from nodos.nodo_c import Nodo_c
 
 class Cargador_Dao:
     def __init__(self,root):
-        self.Cargador=[]
+
+        self.primero=None
 
 
 
 
 
+    def crear_producto(self,c):
 
-    def crear_producto(self,nombre):
-        
-
-
-        nuevo_producto = Cargador(nombre)
-        self.Cargador.append(nuevo_producto)
+    
+        if self.primero is None:
+            self.primero =Nodo_c(c=c)
+            return
+        actual = self.primero
+        while actual.siguiente:
+            actual = actual.siguiente
+        actual.siguiente= Nodo_c(c=c)
         print("Se agrego un nuevo archivo")
-        return  True    
+
+    
     
     def devolver(self):
-        return self.Cargador
+        actual = self.primero
+        return actual
+    
+    def eliminar(self):
+        while self.primero:
+            temp = self.primero
+            self.primero = self.primero.siguiente
+            temp.siguiente = None 
     
 
 

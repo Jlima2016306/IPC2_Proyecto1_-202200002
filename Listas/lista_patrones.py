@@ -44,26 +44,22 @@ class lista_patrones:
     print("")
     print("")
     print("")
-    resultado = ""  # Inicializa un string vacío para almacenar el resultado final  
-    # Bucle principal que se ejecuta mientras haya nodos en la lista
+    resultado = "" 
     while self.primero:
-      actual = self.primero  # Comienza desde el primer nodo en la lista
-      temp_string = ""  # String temporal para almacenar niveles coincidentes
-      temp_niveles = ""  # Lista temporal para almacenar niveles      
-      # Bucle interno para recorrer la lista de nodos y buscar coincidencias
+      actual = self.primero  
+      temp_string = ""  
+      temp_niveles = ""  
+
       
       while actual:
         if actual.patron.cadena_patron == self.primero.patron.cadena_patron:
-          temp_niveles+=(str(actual.patron.t))+","  # Agrega el nivel a la lista temporal
-          # Si no hay nodo siguiente, elimina el primer nodo
+          temp_niveles+=(str(actual.patron.t))+","  
         actual=actual.siguiente
-      # Terminamos la iteración, quiere decir que ya tenemos la coincidencias:
       buffer=""
-      #print(temp_niveles)
       for digito in temp_niveles:
         if digito.isdigit():
           buffer+=digito
-        #Quiere decir que viene una coma
+        
         else:
           if buffer!="":
             self.eliminar(int(buffer))
@@ -71,4 +67,11 @@ class lista_patrones:
           else:
             buffer=""
       resultado+=temp_niveles+"--"
-    return resultado  # Devuelve el resultado final con la agrupación de niveles
+    return resultado 
+
+
+  def eliminar(self):
+        while self.primero:
+            temp = self.primero
+            self.primero = self.primero.siguiente
+            temp.siguiente = None 
