@@ -70,7 +70,6 @@ def imprimir_Lista():
 
             lista_grupos_temporal=lista_grupos()
             for dato_senal in senales_temporal.findall("dato"):
-                print("Calculando las matrices...")
                 t_dato = dato_senal.get("t")
                 A_dato = dato_senal.get("A")
                 num_dato = dato_senal.text
@@ -78,16 +77,16 @@ def imprimir_Lista():
                     num_dato = 0
 
                 nuevo = Dato(int(t_dato), int(A_dato),int(num_dato))
-                Lista_dato_temporal.insertar_dato(nuevo)
+                Lista_dato_temporal.insertar_dato_ordenado  (nuevo)
                 if num_dato != "NULL" and int(num_dato) >0:
                     nuevo = Dato(int(t_dato), int(A_dato),1)
-                    Lista_dato_patrones_temporal.insertar_dato(nuevo)
+                    Lista_dato_patrones_temporal.insertar_dato_ordenado(nuevo)
                 else:
                     nuevo = Dato(int(t_dato), int(A_dato),0)
-                    Lista_dato_patrones_temporal.insertar_dato(nuevo)                
+                    Lista_dato_patrones_temporal.insertar_dato_ordenado(nuevo)                
             Lista_senales_temporal.Incertar_dato(Senal(nombre_Senal,t_Senal,A_Senal,Lista_dato_temporal,Lista_dato_patrones_temporal,lista_patrones_temporal,lista_grupos_temporal))
             print("Matrices ok!")
-        
+        Lista_senales_temporal.recorrer_e_imprimir_lista()
     else:
         print("Sin archivos")
 
@@ -134,7 +133,7 @@ def Inicialializar():
     Lista_senales_temporal.eliminar()
     Lista_dato().eliminar()
     lista_grupos().eliminar()
-    lista_patrones().eliminar()
+    lista_patrones().eliminar2()
     Cargador_Dao_list.eliminar()
     print("eliminado todo... OK!")
 

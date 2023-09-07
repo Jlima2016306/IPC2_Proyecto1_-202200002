@@ -70,7 +70,7 @@ class lista_patrones:
     return resultado 
 
 
-  def eliminar(self):
+  def eliminar2(self):
         while self.primero:
             temp = self.primero
             self.primero = self.primero.siguiente

@@ -43,7 +43,7 @@ class Lista_dato:
     print("===========================================================================================")
     actual = self.primero
     while actual != None:
-      print(" Nivel: ",actual.dato.t,"No. Celda: ",actual.dato.A," Prisionero:",actual.dato.num)
+      print(" t: ",actual.dato.t,"A: ",actual.dato.A," Num:",actual.dato.num)
       actual = actual.siguiente
     print("===========================================================================================")
 
@@ -108,7 +108,9 @@ class Lista_dato:
   def devolver_cadena_del_grupo(self,grupo):
     string_resultado=""
     string_temporal=""
+    nuevo_cad=""
     buffer=""
+    print(grupo)
 
     for digito in grupo:
       if digito.isdigit():
@@ -117,10 +119,69 @@ class Lista_dato:
         string_temporal=""
         actual = self.primero
         while actual != None:
-          if actual.dato.t==int(buffer):
-            string_temporal+=str(actual.dato.num) +","
+          if actual.dato.t==int(buffer):            
+            kes=False
+            vaK= False
+            contador=0
+            cont=0
+            contac=0
+            nuevo_cad=""
+            pir=0
+
+            for caracter in string_resultado:
+              cont+=1
+
+  
+              if caracter.isdigit():
+
+
+                contador += 1   
+                if int(contador) == int(contac):
+                  contador=pir+1
+                  contac=0
+                  continue           
+                 
+
+                print("contador="+caracter)
+
+                pas = caracter
+                print(caracter+"==ddddd==")
+       
+                caracter=self.nar(string_resultado,cont,pas)
+                contac=contador
+                if len(caracter)>1:
+                  contac=contador+ len(caracter)-1
+                  pir=contador
+                  print(caracter+"===="+str(len(caracter))+"===="+str(contador)+"====="+str(contac))
+
+                print(str(contador)+":d:" +str(actual.dato.A))
+
+
+                if contador == int(actual.dato.A) :
+                  kes = True
+                  print(str(caracter)+":d:" +str(contador)+":"+str(actual.dato.A)+":"+str(actual.dato.num))
+                  nuevo_cad += str(int(caracter) + int(actual.dato.num)) 
+                else:
+                     nuevo_cad += caracter
+              else:
+                  nuevo_cad += caracter
+            if kes == False:
+                
+                
+                string_temporal +=str(actual.dato.num) +","   
+                print("finB")
+            else: 
+                vaK=True     
+                print("finA")
+                string_resultado=nuevo_cad  
+          print("Te")
           actual = actual.siguiente
-        string_resultado+=string_temporal+"\n"
+        if vaK == False:
+
+          string_resultado+=string_temporal
+        else:   
+          string_resultado=nuevo_cad
+
         buffer=""
     return string_resultado
   
@@ -129,4 +190,29 @@ class Lista_dato:
             temp = self.primero
             self.primero = self.primero.siguiente
             temp.siguiente = None 
+  def nar(self,string_resultado,contador,caracter):
+                  
+                  contador2=0
+                  contador+=1
+                  for caracter2 in string_resultado:
+                     contador2+=1
+                     if contador2 == contador:
+                        if caracter2.isdigit():
+                           caracter= str(caracter)+str(caracter2) 
+                           return self.nar(string_resultado,contador2,caracter)
+                        if caracter2==',':
+                           return str(caracter)
+                        
+                        
+  def narC(self,string_resultado,contador,caracter):
+                  cont4=0
+                  contador2=0
+
+                  for caracter2 in string_resultado:
+                     contador2+=1
+                     if caracter2.isdigit():
+                          cont4+=1
+                          if caracter2==caracter:
+                            return cont4
+                        
     

@@ -46,7 +46,7 @@ class Lista_senales:
         actual = self.primero
         while actual != None:
             if actual.senal.nombre==nombre_senal:
-                actual=self.primero
+                
        
                 actual.senal.lista_datos.generar_grafica(actual.senal.nombre,
                                                     str(actual.senal.t),
@@ -60,7 +60,6 @@ class Lista_senales:
         actual=self.primero
         while actual != None:
             if actual.senal.nombre==nombre_senal:
-                actual=self.primero
        
                 actual.senal.lista_patrones_datos.generar_grafica(actual.senal.nombre,
                                                     str(actual.senal.t),
